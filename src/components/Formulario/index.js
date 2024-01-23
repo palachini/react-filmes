@@ -4,20 +4,7 @@ import Botao from '../Botao'
 import './Formulario.css'
 import { useState } from 'react'
 
-const Formulario = () => {
-
-  const generos = [
-    'Ação',
-    'Animação',
-    'Aventura',
-    'Comédia',
-    'Documentário',
-    'Drama',
-    'Ficção científica',
-    'Musical',
-    'Romance',
-    'Suspense'
-  ];
+const Formulario = (props) => {
 
   const rankings = [
     'Muito Top',
@@ -34,7 +21,16 @@ const Formulario = () => {
 
   const aoSalvar = (evento) => {
     evento.preventDefault()
-    console.log('Iupaa ta salvo', titulo, genero, imagem, ranking)
+    props.aoFilmeCadastrado({
+      titulo,
+      genero,
+      imagem,
+      ranking
+    })
+    setGenero('')
+    setImagem('')
+    setRanking('')
+    setTitulo('')
   }
 
   return (
@@ -51,7 +47,7 @@ const Formulario = () => {
         <ListaSuspensa
           obrigatorio={true}
           label="Gênero"
-          itens={generos}
+          itens={props.generos}
           valor={genero}
           aoAlterado={valor => setGenero(valor)}
         />
